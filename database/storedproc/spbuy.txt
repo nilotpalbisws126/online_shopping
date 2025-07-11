@@ -1,0 +1,22 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spbuy]    Script Date: 12/17/2014 21:08:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[spbuy] @customer_id varchar(10),@grndtot int
+
+AS
+begin
+DECLARE @Count INT
+declare @product_id varchar(15)
+select @product_id=product_id from cart where customer_id=@customer_id
+SELECT @Count = qnty
+FROM cart
+WHERE product_id = @product_id and customer_id=@customer_id
+insert into requests values(@customer_id,@product_id,@Count,GETDATE())
+
+insert into buys values (@customer_id,@grndtot)
+delete from cart where customer_id=@customer_id
+end

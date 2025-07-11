@@ -1,0 +1,32 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spdel]    Script Date: 12/17/2014 21:12:43 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROC [dbo].[spdel] @customer_id varchar(10),@product_id varchar(15)
+
+AS
+BEGIN
+DECLARE @Count INT
+DECLARE @Counter INT
+DECLARE @ReturnCode INT
+declare @qnty int
+
+
+SELECT @Count = qnty
+FROM cart
+WHERE product_id = @product_id and customer_id=@customer_id
+
+BEGIN
+
+update products set avail=((select avail from products where product_id=@product_id)+@Count)
+END
+
+delete from cart where product_id=@product_id and customer_id=@customer_id
+
+
+
+end

@@ -1,0 +1,33 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spdisp]    Script Date: 12/17/2014 21:13:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROC [dbo].[spdisp] @customer_id varchar(10),@product_id varchar(15)
+
+AS
+BEGIN
+DECLARE @Count INT
+DECLARE @Counter INT
+DECLARE @ReturnCode INT
+declare @qnty int
+
+
+SELECT @Count = qnty
+FROM cart
+WHERE product_id = @product_id and customer_id=@customer_id
+
+BEGIN
+insert into disp values (@customer_id,@product_id,GETDATE())
+
+DELETE FROM requests WHERE (product_id = @product_id)
+END
+
+
+
+
+
+end

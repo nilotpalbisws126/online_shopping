@@ -1,0 +1,59 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spcart]    Script Date: 12/17/2014 21:09:44 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[spcart] @UserName varchar(10),@Prod_id varchar(15)
+
+AS
+BEGIN
+DECLARE @Count INT
+DECLARE @Counter INT
+DECLARE @ReturnCode INT
+declare @price bigint
+declare @c1 int
+
+select @price=price from products  where product_id=@Prod_id  
+
+SELECT @Count = (avail)
+FROM products
+WHERE product_id = @Prod_id
+select @c1=COUNT(customer_id) from cart where customer_id=@UserName 
+
+
+
+
+
+IF @Count <=0
+BEGIN
+SET @ReturnCode = - 1
+END
+ELSE
+BEGIN
+--if @c1=0
+--begin
+--insert into cart values(@Prod_id,@UserName,1,@price)
+--end
+SET @ReturnCode = 1
+SELECT @Counter= COUNT(product_id)
+FROM cart WHERE product_id = @Prod_id
+IF @Counter=0
+BEGIN
+
+INSERT INTO cart
+VALUES (@Prod_id,@UserName,1,@price)
+UPDATE products set avail=((select avail from products where product_id=@Prod_id)-1) where product_id=@Prod_id
+END
+ELSE
+BEGIN
+
+UPDATE cart set qnty=((select qnty from cart where product_id=@Prod_id)+1) where product_id=@Prod_id
+UPDATE cart set tot=(@price*qnty) where product_id=@Prod_id
+
+UPDATE products set avail=((select avail from products where product_id=@Prod_id)-1) where product_id=@Prod_id
+end
+end
+SELECT @ReturnCode AS ReturnValue
+END

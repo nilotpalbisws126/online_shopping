@@ -1,0 +1,30 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[InsertDetails_Sp]    Script Date: 12/17/2014 21:07:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[InsertDetails_Sp]
+
+             (   @product_id                   VARCHAR ( 15 ),
+
+                @product_name                            VARCHAR ( 15 ),
+
+                @avail                       int,
+
+                @Price                                bigint,
+
+                @img                         VARBINARY ( MAX )=NULL
+                )
+
+
+AS
+BEGIN  
+                SET NOCOUNT ON ;
+
+                INSERT INTO products ( product_id, product_name , avail , price , img )
+
+    VALUES ( @product_id , @product_name , @avail , @Price , @img )
+
+END

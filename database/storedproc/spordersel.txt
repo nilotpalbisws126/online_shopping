@@ -1,0 +1,23 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spordersel]    Script Date: 12/17/2014 21:14:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROC [dbo].[spordersel] @customer_id varchar(10)
+
+AS
+BEGIN
+DECLARE @Count INT
+DECLARE @Counter INT
+DECLARE @ReturnCode INT
+declare @qnty int
+
+SELECT r.customer_id, r.product_id, product_name, r.qnty,r.dte FROM requests AS r CROSS JOIN products AS p WHERE (r.product_id = p.product_id) AND (r.customer_id = @customer_id)
+
+
+
+
+end

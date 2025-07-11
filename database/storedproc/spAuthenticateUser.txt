@@ -1,0 +1,26 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spAuthenticateUser]    Script Date: 12/17/2014 21:07:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER Procedure [dbo].[spAuthenticateUser]
+@UserName varchar(10),
+@Password varchar(20)
+as
+Begin
+ Declare @Count int
+ 
+ Select @Count = COUNT(customer_id) from customer
+ where [customer_id] = @UserName and [passwd] = @Password
+ 
+ if(@Count = 1)
+ Begin
+  Select 1 as ReturnCode
+ End
+ Else
+ Begin
+  Select -1 as ReturnCode
+ End
+End 

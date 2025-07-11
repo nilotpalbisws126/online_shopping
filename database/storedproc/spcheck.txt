@@ -1,0 +1,30 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spcheck]    Script Date: 12/17/2014 21:12:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROC [dbo].[spcheck] @UserName varchar(10)
+
+AS
+BEGIN
+DECLARE @Count INT
+DECLARE @zip bigint
+DECLARE @ReturnCode INT
+
+select @zip=zipcode from customer where customer_id=@UserName
+
+SELECT @Count = count(zipcode)
+FROM zip
+WHERE zipcode = @zip
+if @Count=1
+Begin
+  Select 1 as ReturnCode
+ End
+  Begin
+  Select -1 as ReturnCode
+ End
+
+end

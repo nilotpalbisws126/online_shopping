@@ -1,0 +1,20 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spselect]    Script Date: 12/17/2014 21:15:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[spselect] @customer_id varchar(10)
+
+AS
+begin
+DECLARE @Count INT
+DECLARE @Cc INT
+select @Count=count(product_id) from cart where customer_id=@customer_id
+--if @Count>0
+begin
+select @cc=SUM(tot) from cart where customer_id=@customer_id 
+select distinct customer_id,@cc as grndtot from cart where customer_id=@customer_id 
+end
+end

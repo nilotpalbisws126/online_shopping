@@ -1,0 +1,26 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spcancelreq]    Script Date: 12/17/2014 21:09:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROC [dbo].[spcancelreq] @customer_id varchar(10),@product_id varchar(15)
+
+AS
+BEGIN
+DECLARE @Count INT
+DECLARE @zip bigint
+DECLARE @ReturnCode INT
+declare @avail int
+
+select @avail=avail from products where product_id=@product_id
+
+select @Count=qnty from requests where customer_id=customer_id and product_id=@product_id
+update products set avail=@avail+@Count where product_id=@product_id
+
+delete from requests where product_id=@product_id and customer_id=customer_id
+
+
+end

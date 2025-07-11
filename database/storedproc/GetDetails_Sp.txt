@@ -1,0 +1,16 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[GetDetails_Sp]    Script Date: 12/17/2014 21:06:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetDetails_Sp]         
+
+AS
+BEGIN  
+                SET NOCOUNT ON ;
+
+                SELECT * FROM products   
+
+END

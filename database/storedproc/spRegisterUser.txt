@@ -1,0 +1,33 @@
+USE [online_shopping]
+GO
+/****** Object:  StoredProcedure [dbo].[spRegisterUser]    Script Date: 12/17/2014 21:14:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[spRegisterUser] @UserName varchar(10)
+,@Password VARCHAR(20)
+,@Email VARCHAR(20),@f_name varchar(15),@l_name varchar( 15),@gender varchar(6),@address1 varchar(25),@address2 varchar(25),@mobno varchar(12),@zipcode bigint
+AS
+BEGIN
+DECLARE @Count INT
+DECLARE @ReturnCode INT
+
+SELECT @Count = COUNT(customer_id)
+FROM customer
+WHERE customer_id = @UserName
+
+IF @Count > 0
+BEGIN
+SET @ReturnCode = - 1
+END
+ELSE
+BEGIN
+SET @ReturnCode = 1
+
+INSERT INTO customer
+VALUES (@f_name,@l_name,@gender,@UserName,@Password,@Email,@address1,@address2,@mobno,@zipcode)
+END
+
+SELECT @ReturnCode AS ReturnValue
+END
