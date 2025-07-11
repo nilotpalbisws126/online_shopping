@@ -26,8 +26,8 @@ Although created for academic purposes, the code provides a solid starting point
 ## Core Features
 | Category         | Details |
 |------------------|---------|
-| 🔍 **Product Browsing** | Filter by category, search by keyword, responsive product cards. |
-| 👤 **Authentication**   | User registration, login, hashed passwords via ASP.NET Identity. |
+| 🔍 **Product Browsing** | Sort by price, search by keyword, responsive product cards. |
+| 👤 **Authentication**   | User registration, login, forget password, hashed passwords via ASP.NET Identity. |
 | 🛒 **Shopping Cart**    | Add / update / remove items, cart stored per user session. |
 | 💳 **Checkout**         | Shipping form, order confirmation, transactional email stub. |
 | 📊 **Admin Dashboard**  | (Optional) rudimentary CRUD for products & categories. |
@@ -39,7 +39,7 @@ Although created for academic purposes, the code provides a solid starting point
 |-------|------------|
 | **Frontend** | HTML, CSS, Bootstrap |
 | **Backend**  | ASP.NET MVC (or Web Forms) on .NET Framework 4.8 |
-| **Database** | SQL Server Express |
+| **Database** | Microsoft SQL Server 2014, SQL stored procedures |
 | **Auth**     | ASP.NET Identity (cookie-based) |
 
 ---
