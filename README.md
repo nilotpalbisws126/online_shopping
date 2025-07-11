@@ -7,14 +7,7 @@
 1. [About the Project](#about-the-project)  
 2. [Core Features](#core-features)  
 3. [Tech Stack](#tech-stack)  
-4. [Getting Started](#getting-started)  
-5. [Running the Application](#running-the-application)  
-6. [Project Structure](#project-structure)  
-7. [Screenshots](#screenshots)  
-8. [Roadmap & Ideas](#roadmap--ideas)  
-9. [Contributing](#contributing)  
-10. [License](#license)  
-11. [Contact](#contact)  
+
 
 ---
 
